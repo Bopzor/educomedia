@@ -1,0 +1,29 @@
+{
+  "name": "educomedia",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Bopzor",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.7.10",
+    "@types/redux": "^3.6.0",
+    "@typescript-eslint/eslint-plugin": "^4.30.0",
+    "@typescript-eslint/parser": "^4.30.0",
+    "earljs": "^0.1.10",
+    "eslint": "^7.32.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "mocha": "^9.1.1",
+    "prettier": "^2.3.2",
+    "redux-devtools-extension": "^2.13.9",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.2"
+  },
+  "dependencies": {
+    "redux": "^4.1.1",
+    "redux-thunk": "^2.3.0"
+  }
+}
