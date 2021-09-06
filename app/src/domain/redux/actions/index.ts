@@ -1,10 +1,15 @@
-type ValueOf<T> = T[keyof T];
-
-export const Actions = {
-  setInformation: 'setInformation',
+export type Action<T extends string> = {
+  type: T;
 };
 
-export const createAction = <Payload>(type: ValueOf<typeof Actions>, payload: Payload) => ({
-  type,
-  payload,
-});
+export type ActionWithPayload<T extends string, P> = Action<T> & { payload: P };
+
+export function createAction<T extends string>(type: T): Action<T>;
+export function createAction<T extends string, P>(type: T, payload: P): ActionWithPayload<T, P>;
+export function createAction<T extends string, P>(type: T, payload?: P): Action<T> | ActionWithPayload<T, P> {
+  if (payload !== undefined) {
+    return { type, payload };
+  }
+
+  return { type };
+}

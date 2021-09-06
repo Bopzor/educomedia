@@ -2,14 +2,25 @@ import { Information } from '../../domain/entities/information';
 import InformationGateway from '../../domain/gateways/InformationGateway';
 
 class InMemoryInformationGateway implements InformationGateway {
-  private informations: Map<string, Information> = new Map();
+  informations: Map<string, Information> = new Map();
+  selections: [number, number][] = [];
 
-  constructor() {
-    this.informations.set('info-1', { id: 'info-1', content: 'content info 1' });
+  constructor(initialInformations?: Information[]) {
+    if (initialInformations) {
+      for (const information of initialInformations) {
+        this.informations.set(information.id, information);
+      }
+    }
   }
 
-  accessInformation(id: string) {
+  async accessInformation(id: string): Promise<Information> {
     return this.informations.get(id)!;
+  }
+
+  async selectText(id: string, start: number, end: number): Promise<[number, number][]> {
+    this.selections.push([start, end]);
+
+    return this.selections;
   }
 }
 
