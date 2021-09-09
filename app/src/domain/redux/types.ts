@@ -3,7 +3,7 @@ import { ThunkAction, ThunkMiddleware } from 'redux-thunk';
 import { Information } from '../entities/information';
 import InformationGateway from '../gateways/InformationGateway';
 import { Range } from '../types';
-import { setInformation, setSelections, setSelectionsValidated } from './actions/informationActions';
+import { clearSelections, setInformation, setSelections, setSelectionsValidated } from './actions/informationActions';
 import { AppStore } from './store';
 
 export type AppState = {
@@ -19,7 +19,9 @@ export type Dependencies = {
 export type GetState = AppStore['getState'];
 export type Dispatch = AppStore['dispatch'];
 
-export type Action = ReturnType<typeof setInformation | typeof setSelections | typeof setSelectionsValidated>;
+export type Action = ReturnType<
+  typeof setInformation | typeof setSelections | typeof setSelectionsValidated | typeof clearSelections
+>;
 
 export type ThunkResult<R> = ThunkAction<R, AppState, Dependencies, ReduxAction>;
 export type AppThunkMiddleware = ThunkMiddleware<AppState, Action, Dependencies>;

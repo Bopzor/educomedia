@@ -20,12 +20,17 @@ const informationReducer = (state: AppState = initialState, action: Action): App
         selections: action.payload,
       };
 
-    case 'set-selections-validated': {
+    case 'set-selections-validated':
       return {
         ...state,
         isSelectionsValidated: action.payload,
       };
-    }
+
+    case 'clear-selections':
+      return {
+        ...state,
+        selections: [],
+      };
 
     default:
       return state;
