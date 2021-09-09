@@ -3,6 +3,7 @@ import { Action, AppState } from '../types';
 const initialState: AppState = {
   information: undefined,
   selections: [],
+  isSelectionsValidated: false,
 };
 
 const informationReducer = (state: AppState = initialState, action: Action): AppState => {
@@ -18,6 +19,13 @@ const informationReducer = (state: AppState = initialState, action: Action): App
         ...state,
         selections: action.payload,
       };
+
+    case 'set-selections-validated': {
+      return {
+        ...state,
+        isSelectionsValidated: action.payload,
+      };
+    }
 
     default:
       return state;

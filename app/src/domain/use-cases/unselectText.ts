@@ -1,7 +1,7 @@
 import { setSelections } from '../redux/actions/informationActions';
 import type { Dispatch, GetState } from '../redux/types';
 import { isOverlappingRange } from '../../utils';
-import { Range } from './types';
+import { Range } from '../types';
 
 const unselectText =
   (start: number, end: number) =>

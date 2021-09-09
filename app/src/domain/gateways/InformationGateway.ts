@@ -1,8 +1,9 @@
 import { Information } from '../entities/information';
+import { Range } from '../types';
 
 interface InformationGateway {
   accessInformation: (id: string) => Promise<Information>;
-  selectText: (id: string, start: number, end: number) => Promise<[number, number][]>;
+  validateSelections: (selections: Range[]) => Promise<void>;
 }
 
 export default InformationGateway;
