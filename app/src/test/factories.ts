@@ -1,4 +1,4 @@
-import { Information } from '../../domain/entities/information';
+import { Information } from '../domain/entities/information';
 
 export const createInformation = (information?: Partial<Information>) => ({
   id: 'info-1',

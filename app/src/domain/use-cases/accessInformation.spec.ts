@@ -1,5 +1,5 @@
 import { expect } from 'earljs';
-import { createInformation } from '../../test/gateways/factories';
+import { createInformation } from '../../test/factories';
 import InMemoryInformationGateway from '../../test/gateways/InMemoryInformationGateway';
 import { AppStore, createStore } from '../redux/store';
 

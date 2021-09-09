@@ -1,7 +1,7 @@
 import { setSelections } from '../redux/actions/informationActions';
 import type { Dispatch, GetState } from '../redux/types';
-
-type Range = [number, number];
+import { isOverlappingRange } from '../../utils';
+import { Range } from './types';
 
 const selectText =
   (start: number, end: number) =>
@@ -22,7 +22,7 @@ const findOverlapping = (item: Range, array: Range[]) => {
   const overlapping: Range[] = [];
 
   for (const [currentStart, currentEnd] of array) {
-    if (isOverlapping([currentStart, currentEnd], item)) {
+    if (isOverlappingRange([currentStart, currentEnd], item)) {
       overlapping.push([currentStart, currentEnd]);
     }
   }
@@ -44,14 +44,6 @@ const getSelectionStartEnd = (item: Range, items: Range[]) => {
   }
 
   return returnedValue;
-};
-
-const isOverlapping = ([currentStart, currentEnd]: Range, [selectionStart, selectionEnd]: Range) => {
-  return (
-    (currentStart <= selectionStart && currentEnd >= selectionStart) ||
-    (currentStart <= selectionEnd && currentEnd >= selectionEnd) ||
-    (currentStart >= selectionStart && currentEnd <= selectionEnd)
-  );
 };
 
 export default selectText;
