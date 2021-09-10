@@ -1,16 +1,16 @@
 import { expect } from 'earljs';
-import InMemoryInformationGateway from '../../test/gateways/InMemoryInformationGateway';
+import InMemoryMisinformationGateway from '../../test/gateways/InMemoryMisinformationGateway';
 import { AppStore, createStore } from '../redux/store';
 import selectText from './selectText';
 import validateSelections from './validateSelections';
 
 describe('validateSelections', () => {
-  let informationGateway: InMemoryInformationGateway;
+  let misinformationGateway: InMemoryMisinformationGateway;
   let store: AppStore;
 
   beforeEach(() => {
-    informationGateway = new InMemoryInformationGateway();
-    store = createStore({ informationGateway });
+    misinformationGateway = new InMemoryMisinformationGateway();
+    store = createStore({ misinformationGateway });
   });
 
   it('validates the selections', async () => {

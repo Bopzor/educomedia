@@ -1,12 +1,12 @@
-import { setSelectionsValidated } from '../redux/actions/informationActions';
+import { setSelectionsValidated } from '../redux/actions/misinformationActions';
 import type { Dependencies, Dispatch, GetState } from '../redux/types';
 
 const validateSelections =
   () =>
-  async (dispatch: Dispatch, getState: GetState, { informationGateway }: Dependencies): Promise<void> => {
+  async (dispatch: Dispatch, getState: GetState, { misinformationGateway }: Dependencies): Promise<void> => {
     const { selections } = getState();
 
-    await informationGateway.validateSelections(selections);
+    await misinformationGateway.validateSelections(selections);
 
     dispatch(setSelectionsValidated(true));
   };

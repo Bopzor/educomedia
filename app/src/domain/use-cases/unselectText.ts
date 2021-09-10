@@ -1,4 +1,4 @@
-import { setSelections } from '../redux/actions/informationActions';
+import { setSelections } from '../redux/actions/misinformationActions';
 import type { Dispatch, GetState } from '../redux/types';
 import { isOverlappingRange } from '../../utils';
 import { Range } from '../types';

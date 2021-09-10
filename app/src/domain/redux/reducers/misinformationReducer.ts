@@ -1,17 +1,18 @@
 import { Action, AppState } from '../types';
 
 const initialState: AppState = {
-  information: undefined,
+  misinformation: undefined,
   selections: [],
   isSelectionsValidated: false,
+  correction: undefined,
 };
 
-const informationReducer = (state: AppState = initialState, action: Action): AppState => {
+const misinformationReducer = (state: AppState = initialState, action: Action): AppState => {
   switch (action.type) {
-    case 'set-information':
+    case 'set-misinformation':
       return {
         ...state,
-        information: action.payload,
+        misinformation: action.payload,
       };
 
     case 'set-selections':
@@ -37,4 +38,4 @@ const informationReducer = (state: AppState = initialState, action: Action): App
   }
 };
 
-export default informationReducer;
+export default misinformationReducer;

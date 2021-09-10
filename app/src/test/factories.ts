@@ -1,7 +1,8 @@
-import { Information } from '../domain/entities/information';
+import { Misinformation } from '../domain/entities/misinformation';
 
-export const createInformation = (information?: Partial<Information>) => ({
-  id: 'info-1',
-  content: 'content info 1',
-  ...information,
+export const createMisinformation = (misinformation?: Partial<Misinformation>): Misinformation => ({
+  id: 'misinfo-1',
+  informationId: 'info-1',
+  content: 'content info 2',
+  ...misinformation,
 });

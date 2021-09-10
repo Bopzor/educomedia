@@ -2,12 +2,12 @@ import { applyMiddleware, createStore as reduxCreateStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
-import informationReducer from './reducers/informationReducer';
+import misinformationReducer from './reducers/misinformationReducer';
 import type { AppThunkMiddleware, Dependencies } from './types';
 
 export const createStore = (dependencies: Dependencies) =>
   reduxCreateStore(
-    informationReducer,
+    misinformationReducer,
     composeWithDevTools(applyMiddleware(thunk.withExtraArgument(dependencies) as AppThunkMiddleware)),
   );
 
