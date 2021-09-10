@@ -1,4 +1,5 @@
 import { expect } from 'earljs';
+
 import InMemoryMisinformationGateway from '../../test/gateways/InMemoryMisinformationGateway';
 import { clearSelections, setSelections } from '../redux/actions/misinformationActions';
 import { AppStore, createStore } from '../redux/store';

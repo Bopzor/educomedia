@@ -1,5 +1,6 @@
 import { setSelectionsValidated } from '../redux/actions/misinformationActions';
 import type { Dispatch } from '../redux/types';
+
 import accessCorrection from './accessCorrection';
 import calculateScore from './calculateScore';
 

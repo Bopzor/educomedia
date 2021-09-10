@@ -1,9 +1,11 @@
 import { Action as ReduxAction } from 'redux';
 import { ThunkAction, ThunkMiddleware } from 'redux-thunk';
+
 import { Correction } from '../entities/correction';
 import { Misinformation } from '../entities/misinformation';
 import MisinformationGateway from '../gateways/MisinformationGateway';
 import { Range } from '../types';
+
 import {
   clearSelections,
   setCorrection,

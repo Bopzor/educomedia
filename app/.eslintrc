@@ -23,6 +23,28 @@
   ],
   "rules": {
     "no-console": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off"
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "simple-import-sort/imports": [
+      "warn",
+      {
+        "groups": [
+          [
+            "^(path|fs|util)$"
+          ],
+          [
+            "^[@a-z]"
+          ],
+          [
+            "^src/"
+          ],
+          [
+            "^../"
+          ],
+          [
+            "^./"
+          ]
+        ]
+      }
+    ]
   }
 }

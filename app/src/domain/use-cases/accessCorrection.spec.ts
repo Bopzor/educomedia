@@ -1,9 +1,11 @@
 import { expect } from 'earljs';
-import InMemoryMisinformationGateway from '../../test/gateways/InMemoryMisinformationGateway';
-import { AppStore, createStore } from '../redux/store';
+
 import { createCorrection, createMisinformation } from '../../test/factories';
-import accessCorrection from './accessCorrection';
+import InMemoryMisinformationGateway from '../../test/gateways/InMemoryMisinformationGateway';
 import { setMisinformation } from '../redux/actions/misinformationActions';
+import { AppStore, createStore } from '../redux/store';
+
+import accessCorrection from './accessCorrection';
 
 describe('accessCorrection', () => {
   let misinformationGateway: InMemoryMisinformationGateway;

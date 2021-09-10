@@ -1,6 +1,8 @@
 import { expect } from 'earljs';
+
 import InMemoryMisinformationGateway from '../../test/gateways/InMemoryMisinformationGateway';
 import { AppStore, createStore } from '../redux/store';
+
 import selectText from './selectText';
 
 describe('selectText', () => {

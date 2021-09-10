@@ -1,4 +1,5 @@
 import { expect } from 'earljs';
+
 import { createMisinformation } from '../../test/factories';
 import InMemoryMisinformationGateway from '../../test/gateways/InMemoryMisinformationGateway';
 import { AppStore, createStore } from '../redux/store';

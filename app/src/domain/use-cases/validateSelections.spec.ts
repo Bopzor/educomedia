@@ -1,8 +1,10 @@
 import { expect } from 'earljs';
+
 import { createCorrection, createMisinformation } from '../../test/factories';
 import InMemoryMisinformationGateway from '../../test/gateways/InMemoryMisinformationGateway';
 import { setMisinformation, setSelections } from '../redux/actions/misinformationActions';
 import { AppStore, createStore } from '../redux/store';
+
 import validateSelections from './validateSelections';
 
 describe('validateSelections', () => {

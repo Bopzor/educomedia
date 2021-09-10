@@ -1,7 +1,8 @@
-import { createAction } from '.';
 import { Correction } from '../../entities/correction';
 import { Misinformation } from '../../entities/misinformation';
 import { Range } from '../../types';
+
+import { createAction } from '.';
 
 export const setMisinformation = (misinformation: Misinformation) => createAction('set-misinformation', misinformation);
 

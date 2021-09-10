@@ -1,15 +1,15 @@
 import { expect } from 'earljs';
 
 import { AppStore, createStore } from '../domain/redux/store';
-import { createCorrection, createMisinformation } from './factories';
-import InMemoryMisinformationGateway from './gateways/InMemoryMisinformationGateway';
-
-import fixture from './fixture.json';
 import { Range } from '../domain/types';
 import accessMisinformation from '../domain/use-cases/accessMisinformation';
 import selectText from '../domain/use-cases/selectText';
-import validateSelections from '../domain/use-cases/validateSelections';
 import unselectText from '../domain/use-cases/unselectText';
+import validateSelections from '../domain/use-cases/validateSelections';
+
+import { createCorrection, createMisinformation } from './factories';
+import fixture from './fixture.json';
+import InMemoryMisinformationGateway from './gateways/InMemoryMisinformationGateway';
 
 describe('e2e', () => {
   let misinformationGateway: InMemoryMisinformationGateway;

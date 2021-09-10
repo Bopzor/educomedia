@@ -1,19 +1,20 @@
 import { expect } from 'earljs';
+
 import { createCorrection, createMisinformation } from '../../test/factories';
+import fixture from '../../test/fixture.json';
 import InMemoryMisinformationGateway from '../../test/gateways/InMemoryMisinformationGateway';
 import { Correction } from '../entities/correction';
 import { Misinformation } from '../entities/misinformation';
-import { AppStore, createStore } from '../redux/store';
-import { Range } from '../types';
-import calculateScore from './calculateScore';
-
-import fixture from '../../test/fixture.json';
 import {
   setCorrection,
   setMisinformation,
   setSelections,
   setSelectionsValidated,
 } from '../redux/actions/misinformationActions';
+import { AppStore, createStore } from '../redux/store';
+import { Range } from '../types';
+
+import calculateScore from './calculateScore';
 const fixtureCorrections = fixture.corrections as { range: Range; text: string }[];
 
 describe('calculateScore', () => {
