@@ -7,3 +7,27 @@ export const isOverlappingRange = ([currentStart, currentEnd]: Range, [selection
     (currentStart >= selectionStart && currentEnd <= selectionEnd)
   );
 };
+
+export const missingInCompareTo = <T>(array: T[], ref: T[]) => {
+  const missing = ref.reduce((r, value) => {
+    if (!array.includes(value)) {
+      r.push(value);
+    }
+
+    return r;
+  }, [] as T[]);
+
+  return missing;
+};
+
+export const extraInCompareTo = <T>(array: T[], ref: T[]) => {
+  const extra = array.reduce((r, value) => {
+    if (!ref.includes(value)) {
+      r.push(value);
+    }
+
+    return r;
+  }, [] as T[]);
+
+  return extra;
+};

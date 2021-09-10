@@ -12,3 +12,5 @@ export const setSelectionsValidated = (isValidated: boolean) => createAction('se
 export const clearSelections = () => createAction('clear-selections');
 
 export const setCorrection = (correction: Correction) => createAction('set-correction', correction);
+
+export const setScore = (score: number) => createAction('set-score', score);

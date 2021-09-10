@@ -8,6 +8,7 @@ import {
   clearSelections,
   setCorrection,
   setMisinformation,
+  setScore,
   setSelections,
   setSelectionsValidated,
 } from './actions/misinformationActions';
@@ -18,6 +19,7 @@ export type AppState = {
   selections: Range[];
   isSelectionsValidated: boolean;
   correction?: Correction;
+  score?: number;
 };
 
 export type Dependencies = {
@@ -33,6 +35,7 @@ export type Action = ReturnType<
   | typeof setSelectionsValidated
   | typeof clearSelections
   | typeof setCorrection
+  | typeof setScore
 >;
 
 export type ThunkResult<R> = ThunkAction<R, AppState, Dependencies, ReduxAction>;

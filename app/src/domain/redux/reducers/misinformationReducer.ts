@@ -39,6 +39,12 @@ const misinformationReducer = (state: AppState = initialState, action: Action): 
         selections: [],
       };
 
+    case 'set-score':
+      return {
+        ...state,
+        score: action.payload,
+      };
+
     default:
       return state;
   }
