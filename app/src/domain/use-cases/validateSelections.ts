@@ -1,14 +1,16 @@
 import { setSelectionsValidated } from '../redux/actions/misinformationActions';
-import type { Dependencies, Dispatch, GetState } from '../redux/types';
+import type { Dispatch } from '../redux/types';
+import accessCorrection from './accessCorrection';
+import calculateScore from './calculateScore';
 
 const validateSelections =
   () =>
-  async (dispatch: Dispatch, getState: GetState, { misinformationGateway }: Dependencies): Promise<void> => {
-    const { selections } = getState();
-
-    await misinformationGateway.validateSelections(selections);
-
+  async (dispatch: Dispatch): Promise<void> => {
     dispatch(setSelectionsValidated(true));
+
+    await dispatch(accessCorrection());
+
+    dispatch(calculateScore());
   };
 
 export default validateSelections;
