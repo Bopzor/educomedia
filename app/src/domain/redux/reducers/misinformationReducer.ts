@@ -15,6 +15,12 @@ const misinformationReducer = (state: AppState = initialState, action: Action): 
         misinformation: action.payload,
       };
 
+    case 'set-correction':
+      return {
+        ...state,
+        correction: action.payload,
+      };
+
     case 'set-selections':
       return {
         ...state,

@@ -1,10 +1,12 @@
 import { Action as ReduxAction } from 'redux';
 import { ThunkAction, ThunkMiddleware } from 'redux-thunk';
+import { Correction } from '../entities/correction';
 import { Misinformation } from '../entities/misinformation';
 import MisinformationGateway from '../gateways/MisinformationGateway';
 import { Range } from '../types';
 import {
   clearSelections,
+  setCorrection,
   setMisinformation,
   setSelections,
   setSelectionsValidated,
@@ -15,6 +17,7 @@ export type AppState = {
   misinformation?: Misinformation;
   selections: Range[];
   isSelectionsValidated: boolean;
+  correction?: Correction;
 };
 
 export type Dependencies = {
@@ -29,6 +32,7 @@ export type Action = ReturnType<
   | typeof setSelections
   | typeof setSelectionsValidated
   | typeof clearSelections
+  | typeof setCorrection
 >;
 
 export type ThunkResult<R> = ThunkAction<R, AppState, Dependencies, ReduxAction>;
