@@ -1,7 +1,7 @@
 import { expect } from 'earljs';
 import InMemoryMisinformationGateway from '../../test/gateways/InMemoryMisinformationGateway';
+import { setSelections } from '../redux/actions/misinformationActions';
 import { AppStore, createStore } from '../redux/store';
-import selectText from './selectText';
 import unselectText from './unselectText';
 
 describe('selectText', () => {
@@ -14,8 +14,12 @@ describe('selectText', () => {
   });
 
   it('unselects given text range', () => {
-    store.dispatch(selectText(2, 8));
-    store.dispatch(selectText(15, 24));
+    store.dispatch(
+      setSelections([
+        [2, 8],
+        [15, 24],
+      ]),
+    );
 
     store.dispatch(unselectText(2, 8));
 
@@ -23,7 +27,7 @@ describe('selectText', () => {
   });
 
   it('unselects text from a selection', () => {
-    store.dispatch(selectText(2, 8));
+    store.dispatch(setSelections([[2, 8]]));
 
     store.dispatch(unselectText(4, 5));
 
@@ -34,7 +38,7 @@ describe('selectText', () => {
   });
 
   it('unselects text at the end of a selection', () => {
-    store.dispatch(selectText(6, 8));
+    store.dispatch(setSelections([[6, 8]]));
 
     store.dispatch(unselectText(8, 8));
 
@@ -42,7 +46,7 @@ describe('selectText', () => {
   });
 
   it('unselects text at the start of a selection', () => {
-    store.dispatch(selectText(2, 3));
+    store.dispatch(setSelections([[2, 3]]));
 
     store.dispatch(unselectText(1, 2));
 

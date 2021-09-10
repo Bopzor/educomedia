@@ -1,7 +1,7 @@
 import { expect } from 'earljs';
 import InMemoryMisinformationGateway from '../../test/gateways/InMemoryMisinformationGateway';
+import { setSelections } from '../redux/actions/misinformationActions';
 import { AppStore, createStore } from '../redux/store';
-import selectText from './selectText';
 import validateSelections from './validateSelections';
 
 describe('validateSelections', () => {
@@ -14,7 +14,7 @@ describe('validateSelections', () => {
   });
 
   it('validates the selections', async () => {
-    store.dispatch(selectText(1, 7));
+    store.dispatch(setSelections([[1, 7]]));
 
     let state = store.getState();
     expect(state.isSelectionsValidated).toEqual(false);

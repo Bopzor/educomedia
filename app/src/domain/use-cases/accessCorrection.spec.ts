@@ -2,8 +2,8 @@ import { expect } from 'earljs';
 import InMemoryMisinformationGateway from '../../test/gateways/InMemoryMisinformationGateway';
 import { AppStore, createStore } from '../redux/store';
 import { createCorrection, createMisinformation } from '../../test/factories';
-import accessInformation from './accessMisinformation';
 import accessCorrection from './accessCorrection';
+import { setMisinformation } from '../redux/actions/misinformationActions';
 
 describe('accessCorrection', () => {
   let misinformationGateway: InMemoryMisinformationGateway;
@@ -17,10 +17,9 @@ describe('accessCorrection', () => {
   it('accesses the correction of given information', async () => {
     const misinformation = createMisinformation();
     const correction = createCorrection();
-    misinformationGateway.misinformations.set(misinformation.id, misinformation);
     misinformationGateway.corrections.set(misinformation.id, correction);
 
-    await store.dispatch(accessInformation(misinformation.id));
+    store.dispatch(setMisinformation(misinformation));
 
     await store.dispatch(accessCorrection());
 
