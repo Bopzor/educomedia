@@ -1,5 +1,5 @@
-import { Correction } from '../domain/entities/correction';
-import { Misinformation } from '../domain/entities/misinformation';
+import { Correction } from '../entities/correction';
+import { Misinformation } from '../entities/misinformation';
 
 export const createMisinformation = (misinformation?: Partial<Misinformation>): Misinformation => ({
   id: 'misinfo-1',

@@ -1,8 +1,8 @@
 import { expect } from 'earljs';
 
-import { createMisinformation } from '../../test/factories';
-import InMemoryMisinformationGateway from '../../test/gateways/InMemoryMisinformationGateway';
 import { AppStore, createStore } from '../redux/store';
+import { createMisinformation } from '../shared/factories';
+import InMemoryMisinformationGateway from '../shared/gateways/InMemoryMisinformationGateway';
 
 import accessInformation from './accessMisinformation';
 
