@@ -21,6 +21,7 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
   ],
+  "ignorePatterns": "**/*.js",
   "rules": {
     "no-console": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
@@ -28,6 +29,9 @@
       "warn",
       {
         "groups": [
+          [
+            "^(react|react-dom)$"
+          ],
           [
             "^(path|fs|util)$"
           ],

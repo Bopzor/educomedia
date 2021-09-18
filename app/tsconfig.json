@@ -1,7 +1,18 @@
 {
+  "include": [
+    "./src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
   "compilerOptions": {
+    "outDir": "dist",
     "strict": true,
+    "jsx": "preserve",
+    "moduleResolution": "node",
     "esModuleInterop": true,
-    "resolveJsonModule": true
-  }
+    "resolveJsonModule": true,
+    "sourceMap": true
+  },
 }
