@@ -28,19 +28,19 @@ describe('e2e', () => {
 
     await store.dispatch(accessMisinformation(misinformation.id));
 
-    store.dispatch(selectText(27, 87));
+    store.dispatch(selectText(27, 86));
 
     store.dispatch(unselectText(27, 36));
 
-    store.dispatch(selectText(800, 833));
-    store.dispatch(selectText(2698, 2758));
+    store.dispatch(selectText(797, 829));
+    store.dispatch(selectText(2698, 2757));
 
     await store.dispatch(validateSelections());
 
     const state = store.getState();
 
     expect(state.misinformation!).toBeAnObjectWith({ id: misinformation.id });
-    expect(state.selections).toBeAnArrayWith([37, 87], [800, 833], [2698, 2758]);
+    expect(state.selections).toBeAnArrayWith([37, 86], [797, 829], [2698, 2757]);
     expect(state.correction!).toBeAnObjectWith({ misinformationId: misinformation.id });
     expect(state.score).toEqual(100);
   });

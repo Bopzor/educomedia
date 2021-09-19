@@ -1,6 +1,6 @@
-import { isOverlappingRange } from '../../utils';
 import { setSelections } from '../redux/actions/misinformationActions';
 import type { Dispatch, GetState } from '../redux/types';
+import { isOverlappingRange } from '../shared/utils';
 import { Range } from '../types';
 
 const unselectText =

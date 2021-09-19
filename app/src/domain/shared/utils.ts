@@ -1,4 +1,4 @@
-type Range = [number, number];
+import { Range } from '../types';
 
 export const isOverlappingRange = ([currentStart, currentEnd]: Range, [selectionStart, selectionEnd]: Range) => {
   return (
@@ -30,4 +30,14 @@ export const extraInCompareTo = <T>(array: T[], ref: T[]) => {
   }, [] as T[]);
 
   return extra;
+};
+
+export const numberIsInRangeArray = (nb: number, rangeArray: Range[]) => {
+  for (const [start, end] of rangeArray) {
+    if (start <= nb && end >= nb) {
+      return true;
+    }
+  }
+
+  return false;
 };

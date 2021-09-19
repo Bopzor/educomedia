@@ -1,14 +1,15 @@
 import { useState } from 'react';
 
-import { Range } from '../../../../../../domain/types';
+import { numberIsInRangeArray } from 'src/domain/shared/utils';
+import { Range } from 'src/domain/types';
 
 type ParentNodeWithPosition = ParentNode & { dataset: { position: string } };
 
-const useHighlightable = (selections: Range[], onSelectText: (range: Range) => void) => {
+const useHighlightable = (disabled: boolean, selections: Range[], onSelectText: (range: Range) => void) => {
   const [isSelecting, setIsSelecting] = useState(false);
 
   const handleOnMouseUp = () => {
-    if (!isSelecting) {
+    if (disabled || !isSelecting) {
       return;
     }
 
@@ -34,13 +35,7 @@ const useHighlightable = (selections: Range[], onSelectText: (range: Range) => v
   };
 
   const isHighlighted = (index: number) => {
-    for (const [start, end] of selections) {
-      if (start <= index && end >= index) {
-        return true;
-      }
-    }
-
-    return false;
+    return numberIsInRangeArray(index, selections);
   };
 
   return { setIsSelecting, isHighlighted, handleOnMouseUp };

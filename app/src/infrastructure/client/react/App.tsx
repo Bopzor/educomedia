@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import accessMisinformation from 'src/domain/use-cases/accessMisinformation';
 
-import MisinformationView from './Views/MisinformationView';
+import ContentView from './Views/ContentView/ContentView';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const App: React.FC = () => {
 
   return (
     <>
-      <MisinformationView />
+      <ContentView />
     </>
   );
 };

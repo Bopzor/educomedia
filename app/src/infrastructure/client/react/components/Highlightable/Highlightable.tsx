@@ -1,23 +1,33 @@
 import React from 'react';
 
-import { Range } from '../../../../../domain/types';
+import { Range } from 'src/domain/types';
 
 import useHighlightable from './hooks/useHighlightable';
 
 type HighlightableProps = {
   text: string;
   selections: Range[];
+  disabled: boolean;
   onSelectText: (range: Range) => void;
-  highlightedStyle?: React.CSSProperties;
+  highlightedStyle?: React.CSSProperties | ((charIndex: number) => React.CSSProperties);
 };
 
 const Highlightable: React.FC<HighlightableProps> = ({
   text,
   selections,
+  disabled,
   onSelectText,
   highlightedStyle = { backgroundColor: 'yellow' },
 }) => {
-  const { setIsSelecting, isHighlighted, handleOnMouseUp } = useHighlightable(selections, onSelectText);
+  const { setIsSelecting, isHighlighted, handleOnMouseUp } = useHighlightable(disabled, selections, onSelectText);
+
+  const getStyle = (charIndex: number): React.CSSProperties => {
+    if (typeof highlightedStyle === 'function') {
+      return highlightedStyle(charIndex);
+    }
+
+    return highlightedStyle;
+  };
 
   return (
     <div
@@ -31,7 +41,7 @@ const Highlightable: React.FC<HighlightableProps> = ({
           key={`${char}-${index}`}
           charIndex={index}
           isHighlighted={isHighlighted(index)}
-          style={highlightedStyle}
+          style={getStyle(index)}
         >
           {char}
         </CharNode>

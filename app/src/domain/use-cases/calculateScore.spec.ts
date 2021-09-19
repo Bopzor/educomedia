@@ -41,9 +41,9 @@ describe('calculateScore', () => {
     const misinformation = createMisinformation({ content: fixture.misinformation });
     const correction = createCorrection({ corrections: fixtureCorrections });
     await setupStore(misinformation, correction, [
-      [37, 87],
-      [800, 843],
-      [2698, 2758],
+      [37, 86],
+      [797, 839],
+      [2698, 2757],
     ]);
 
     store.dispatch(calculateScore());

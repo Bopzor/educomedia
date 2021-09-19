@@ -1,6 +1,6 @@
-import { extraInCompareTo, missingInCompareTo } from '../../utils';
 import { setScore } from '../redux/actions/misinformationActions';
 import type { Dispatch, GetState } from '../redux/types';
+import { extraInCompareTo, missingInCompareTo } from '../shared/utils';
 import { Range } from '../types';
 
 const calculateScore =
