@@ -1,12 +1,40 @@
-import { useState } from 'react';
+import { CSSProperties, useCallback, useMemo, useState } from 'react';
 
 import { numberIsInRangeArray } from 'src/domain/shared/utils';
 import { Range } from 'src/domain/types';
 
 type ParentNodeWithPosition = ParentNode & { dataset: { position: string } };
 
-const useHighlightable = (disabled: boolean, selections: Range[], onSelectText: (range: Range) => void) => {
+const useHighlightable = (
+  disabled: boolean,
+  text: string,
+  selections: Range[],
+  highlightedStyle: React.CSSProperties | ((charIndex: number) => CSSProperties),
+  onSelectText: (range: Range) => void,
+) => {
   const [isSelecting, setIsSelecting] = useState(false);
+
+  const getStyle = (charIndex: number): React.CSSProperties => {
+    if (typeof highlightedStyle === 'function') {
+      return highlightedStyle(charIndex);
+    }
+
+    return highlightedStyle;
+  };
+
+  const paragraphs = useMemo(() => text.split('\n\n'), [text]);
+  const getOffsetIndex = useCallback(
+    (index: number) => {
+      let offset = 0;
+
+      for (let i = index; i > 0; i--) {
+        offset += paragraphs[i - 1].length + '\n\n'.length;
+      }
+
+      return offset;
+    },
+    [paragraphs],
+  );
 
   const handleOnMouseUp = () => {
     if (disabled || !isSelecting) {
@@ -38,7 +66,7 @@ const useHighlightable = (disabled: boolean, selections: Range[], onSelectText: 
     return numberIsInRangeArray(index, selections);
   };
 
-  return { setIsSelecting, isHighlighted, handleOnMouseUp };
+  return { paragraphs, getOffsetIndex, getStyle, setIsSelecting, isHighlighted, handleOnMouseUp };
 };
 
 export default useHighlightable;

@@ -19,15 +19,13 @@ const Highlightable: React.FC<HighlightableProps> = ({
   onSelectText,
   highlightedStyle = { backgroundColor: 'yellow' },
 }) => {
-  const { setIsSelecting, isHighlighted, handleOnMouseUp } = useHighlightable(disabled, selections, onSelectText);
-
-  const getStyle = (charIndex: number): React.CSSProperties => {
-    if (typeof highlightedStyle === 'function') {
-      return highlightedStyle(charIndex);
-    }
-
-    return highlightedStyle;
-  };
+  const { paragraphs, getOffsetIndex, getStyle, setIsSelecting, isHighlighted, handleOnMouseUp } = useHighlightable(
+    disabled,
+    text,
+    selections,
+    highlightedStyle,
+    onSelectText,
+  );
 
   return (
     <div
@@ -36,15 +34,19 @@ const Highlightable: React.FC<HighlightableProps> = ({
       }}
       onMouseUp={handleOnMouseUp}
     >
-      {text.split('').map((char: string, index: number) => (
-        <CharNode
-          key={`${char}-${index}`}
-          charIndex={index}
-          isHighlighted={isHighlighted(index)}
-          style={getStyle(index)}
-        >
-          {char}
-        </CharNode>
+      {paragraphs.map((paragraph, paragraphIndex) => (
+        <p key={`paragraph-${paragraphIndex}`} style={{ marginBottom: 8 }}>
+          {paragraph.split('').map((char: string, index: number) => (
+            <CharNode
+              key={`${char}-${index + getOffsetIndex(paragraphIndex)}`}
+              charIndex={index + getOffsetIndex(paragraphIndex)}
+              isHighlighted={isHighlighted(index + getOffsetIndex(paragraphIndex))}
+              style={getStyle(index + getOffsetIndex(paragraphIndex))}
+            >
+              {char}
+            </CharNode>
+          ))}
+        </p>
       ))}
     </div>
   );
