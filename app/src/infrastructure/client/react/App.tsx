@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import accessMisinformation from '../../../domain/use-cases/accessMisinformation';
+import accessMisinformation from 'src/domain/use-cases/accessMisinformation';
 
-import MisinformationView from './components/MisinformationView';
+import MisinformationView from './Views/MisinformationView';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();

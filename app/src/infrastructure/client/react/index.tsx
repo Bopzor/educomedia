@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux';
 
-import { createStore } from '../../../domain/redux/store';
-import { createMisinformation } from '../../../domain/shared/factories';
-import fixture from '../../../domain/shared/fixture.json';
-import InMemoryMisinformationGateway from '../../../domain/shared/gateways/InMemoryMisinformationGateway';
+import { createStore } from 'src/domain/redux/store';
+import { createMisinformation } from 'src/domain/shared/factories';
+import fixture from 'src/domain/shared/fixture.json';
+import InMemoryMisinformationGateway from 'src/domain/shared/gateways/InMemoryMisinformationGateway';
 
 import App from './App';
 
