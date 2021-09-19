@@ -9,8 +9,9 @@ import {
   setSelectionsValidated,
 } from '../redux/actions/misinformationActions';
 import { AppStore, createStore } from '../redux/store';
-import { createCorrection, createMisinformation } from '../shared/factories';
-import fixture from '../shared/fixture.json';
+import { Dependencies } from '../redux/types';
+import { createCorrection, createDeps, createMisinformation } from '../shared/factories';
+import fixture from '../shared/fixture-test.json';
 import InMemoryMisinformationGateway from '../shared/gateways/InMemoryMisinformationGateway';
 import { Range } from '../types';
 
@@ -20,10 +21,12 @@ const fixtureCorrections = fixture.corrections as { range: Range; text: string }
 describe('calculateScore', () => {
   let misinformationGateway: InMemoryMisinformationGateway;
   let store: AppStore;
+  let deps: Dependencies;
 
   beforeEach(() => {
     misinformationGateway = new InMemoryMisinformationGateway();
-    store = createStore({ misinformationGateway });
+    deps = createDeps({ misinformationGateway });
+    store = createStore(deps);
   });
 
   it('calculates the score', async () => {

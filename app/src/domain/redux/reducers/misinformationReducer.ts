@@ -5,10 +5,17 @@ const initialState: AppState = {
   selections: [],
   isSelectionsValidated: false,
   correction: undefined,
+  informationTitle: undefined,
 };
 
 const misinformationReducer = (state: AppState = initialState, action: Action): AppState => {
   switch (action.type) {
+    case 'set-information-title':
+      return {
+        ...state,
+        informationTitle: action.payload,
+      };
+
     case 'set-misinformation':
       return {
         ...state,

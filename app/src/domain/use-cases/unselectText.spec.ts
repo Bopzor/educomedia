@@ -2,6 +2,8 @@ import { expect } from 'earljs';
 
 import { setSelections } from '../redux/actions/misinformationActions';
 import { AppStore, createStore } from '../redux/store';
+import { Dependencies } from '../redux/types';
+import { createDeps } from '../shared/factories';
 import InMemoryMisinformationGateway from '../shared/gateways/InMemoryMisinformationGateway';
 
 import unselectText from './unselectText';
@@ -9,10 +11,12 @@ import unselectText from './unselectText';
 describe('selectText', () => {
   let misinformationGateway: InMemoryMisinformationGateway;
   let store: AppStore;
+  let deps: Dependencies;
 
   beforeEach(() => {
     misinformationGateway = new InMemoryMisinformationGateway();
-    store = createStore({ misinformationGateway });
+    deps = createDeps({ misinformationGateway });
+    store = createStore(deps);
   });
 
   it('unselects given text range', () => {

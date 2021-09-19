@@ -3,12 +3,14 @@ import { ThunkAction, ThunkMiddleware } from 'redux-thunk';
 
 import { Correction } from '../entities/correction';
 import { Misinformation } from '../entities/misinformation';
+import InformationGateway from '../gateways/InformationGateway';
 import MisinformationGateway from '../gateways/MisinformationGateway';
 import { Range } from '../types';
 
 import {
   clearSelections,
   setCorrection,
+  setInformationTitle,
   setMisinformation,
   setScore,
   setSelections,
@@ -18,6 +20,7 @@ import { AppStore } from './store';
 
 export type AppState = {
   misinformation?: Misinformation;
+  informationTitle?: string;
   selections: Range[];
   isSelectionsValidated: boolean;
   correction?: Correction;
@@ -26,6 +29,7 @@ export type AppState = {
 
 export type Dependencies = {
   misinformationGateway: MisinformationGateway;
+  informationGateway: InformationGateway;
 };
 
 export type GetState = AppStore['getState'];
@@ -33,6 +37,7 @@ export type Dispatch = AppStore['dispatch'];
 
 export type Action = ReturnType<
   | typeof setMisinformation
+  | typeof setInformationTitle
   | typeof setSelections
   | typeof setSelectionsValidated
   | typeof clearSelections

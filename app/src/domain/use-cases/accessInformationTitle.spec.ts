@@ -5,9 +5,10 @@ import { createInformation, createMisinformation } from '../shared/factories';
 import InMemoryInformationGateway from '../shared/gateways/InMemoryInformationGateway';
 import InMemoryMisinformationGateway from '../shared/gateways/InMemoryMisinformationGateway';
 
-import accessInformation from './accessMisinformation';
+import accessInformationTitle from './accessInformationTitle';
+import accessMisinformation from './accessMisinformation';
 
-describe('accessMisinformation', () => {
+describe('accessInformationTitle', () => {
   let misinformationGateway: InMemoryMisinformationGateway;
   let informationGateway: InMemoryInformationGateway;
   let store: AppStore;
@@ -18,21 +19,17 @@ describe('accessMisinformation', () => {
     store = createStore({ misinformationGateway, informationGateway });
   });
 
-  it('accesses the information from the id', async () => {
+  it('accesses the information title', async () => {
     const misinformation = createMisinformation();
     const information = createInformation();
     misinformationGateway.misinformations.set(misinformation.id, misinformation);
-    informationGateway.informations.set(information.id, information);
+    informationGateway.informations.set(misinformation.informationId, information);
+    await store.dispatch(accessMisinformation(misinformation.id));
 
-    await store.dispatch(accessInformation(misinformation.id));
+    await store.dispatch(accessInformationTitle());
 
     const state = store.getState();
 
-    expect(state.misinformation).toEqual({
-      id: 'misinfo-1',
-      informationId: 'info-1',
-      content: 'content info 2',
-    });
     expect(state.informationTitle).toEqual('title 1');
   });
 });

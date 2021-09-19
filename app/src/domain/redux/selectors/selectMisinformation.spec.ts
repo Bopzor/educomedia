@@ -1,19 +1,22 @@
 import { expect } from 'earljs';
 
-import { createMisinformation } from '../../shared/factories';
+import { createDeps, createMisinformation } from '../../shared/factories';
 import InMemoryMisinformationGateway from '../../shared/gateways/InMemoryMisinformationGateway';
 import { setMisinformation } from '../actions/misinformationActions';
 import { AppStore, createStore } from '../store';
+import { Dependencies } from '../types';
 
 import selectMisinformation from './selectMisinformation';
 
 describe('selectMisinformation', () => {
   let store: AppStore;
   let misinformationGateway: InMemoryMisinformationGateway;
+  let deps: Dependencies;
 
   before(() => {
     misinformationGateway = new InMemoryMisinformationGateway();
-    store = createStore({ misinformationGateway });
+    deps = createDeps({ misinformationGateway });
+    store = createStore(deps);
   });
 
   it('selects the misinformation', () => {

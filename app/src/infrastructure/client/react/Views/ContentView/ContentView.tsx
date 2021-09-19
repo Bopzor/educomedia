@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { clearSelections } from 'src/domain/redux/actions/misinformationActions';
 import selectCorrection from 'src/domain/redux/selectors/selectCorrection';
+import selectInformationTitle from 'src/domain/redux/selectors/selectInformationTitle';
 import selectMisinformation from 'src/domain/redux/selectors/selectMisinformation';
 import selectSelections from 'src/domain/redux/selectors/selectSelections';
 import validateSelections from 'src/domain/use-cases/validateSelections';
@@ -15,6 +16,7 @@ import Toolbar from '../../components/Toolbar';
 import useContentView from './hooks/useContentView';
 
 const ContentView: React.FC = () => {
+  const informationTitle = useSelector(selectInformationTitle);
   const selections = useSelector(selectSelections);
 
   const misinformation = useSelector(selectMisinformation);
@@ -30,7 +32,7 @@ const ContentView: React.FC = () => {
 
   return (
     <div style={{ margin: 'auto', maxWidth: 800, fontFamily: 'sans-serif' }}>
-      <h1 style={{ textAlign: 'center', marginBottom: 24 }}>Titre</h1>
+      <h1 style={{ textAlign: 'center', marginBottom: 24 }}>{informationTitle}</h1>
 
       <Toolbar
         isUnselectText={isUnselectText}
@@ -39,7 +41,7 @@ const ContentView: React.FC = () => {
         disabled={Boolean(correction)}
       />
 
-      <div style={{ textAlign: 'justify', marginBottom: 64 }}>
+      <div style={{ textAlign: 'justify', marginBottom: 64, marginTop: 32 }}>
         <Highlightable
           text={misinformation.content}
           selections={[...selections, ...correctionRanges]}

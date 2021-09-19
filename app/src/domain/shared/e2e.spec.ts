@@ -7,24 +7,29 @@ import selectText from '../use-cases/selectText';
 import unselectText from '../use-cases/unselectText';
 import validateSelections from '../use-cases/validateSelections';
 
-import { createCorrection, createMisinformation } from './factories';
-import fixture from './fixture.json';
+import { createCorrection, createInformation, createMisinformation } from './factories';
+import fixture from './fixture-test.json';
+import InMemoryInformationGateway from './gateways/InMemoryInformationGateway';
 import InMemoryMisinformationGateway from './gateways/InMemoryMisinformationGateway';
 
 describe('e2e', () => {
   let misinformationGateway: InMemoryMisinformationGateway;
+  let informationGateway: InMemoryInformationGateway;
   let store: AppStore;
 
   beforeEach(() => {
     misinformationGateway = new InMemoryMisinformationGateway();
-    store = createStore({ misinformationGateway });
+    informationGateway = new InMemoryInformationGateway();
+    store = createStore({ misinformationGateway, informationGateway });
   });
 
   it('runs a content', async () => {
     const misinformation = createMisinformation({ content: fixture.misinformation });
+    const information = createInformation(fixture.information);
     const correction = createCorrection({ corrections: fixture.corrections as { range: Range; text: string }[] });
     misinformationGateway.misinformations.set(misinformation.id, misinformation);
     misinformationGateway.corrections.set(misinformation.id, correction);
+    informationGateway.informations.set(information.id, information);
 
     await store.dispatch(accessMisinformation(misinformation.id));
 
@@ -40,6 +45,7 @@ describe('e2e', () => {
     const state = store.getState();
 
     expect(state.misinformation!).toBeAnObjectWith({ id: misinformation.id });
+    expect(state.informationTitle!).toEqual(information.title);
     expect(state.selections).toBeAnArrayWith([37, 86], [797, 829], [2698, 2757]);
     expect(state.correction!).toBeAnObjectWith({ misinformationId: misinformation.id });
     expect(state.score).toEqual(100);
