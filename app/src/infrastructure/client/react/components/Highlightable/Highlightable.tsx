@@ -9,6 +9,7 @@ type HighlightableProps = {
   selections: Range[];
   disabled: boolean;
   onSelectText: (range: Range) => void;
+  getTitle?: (index: number) => string | undefined;
   highlightedStyle?: React.CSSProperties | ((charIndex: number) => React.CSSProperties);
 };
 
@@ -17,6 +18,7 @@ const Highlightable: React.FC<HighlightableProps> = ({
   selections,
   disabled,
   onSelectText,
+  getTitle,
   highlightedStyle = { backgroundColor: 'yellow' },
 }) => {
   const { paragraphs, getOffsetIndex, getStyle, setIsSelecting, isHighlighted, handleOnMouseUp } = useHighlightable(
@@ -36,16 +38,21 @@ const Highlightable: React.FC<HighlightableProps> = ({
     >
       {paragraphs.map((paragraph, paragraphIndex) => (
         <p key={`paragraph-${paragraphIndex}`} style={{ marginBottom: 8 }}>
-          {paragraph.split('').map((char: string, index: number) => (
-            <CharNode
-              key={`${char}-${index + getOffsetIndex(paragraphIndex)}`}
-              charIndex={index + getOffsetIndex(paragraphIndex)}
-              isHighlighted={isHighlighted(index + getOffsetIndex(paragraphIndex))}
-              style={getStyle(index + getOffsetIndex(paragraphIndex))}
-            >
-              {char}
-            </CharNode>
-          ))}
+          {paragraph.split('').map((char: string, index: number) => {
+            const idx = index + getOffsetIndex(paragraphIndex);
+
+            return (
+              <CharNode
+                key={`${char}-${idx}`}
+                charIndex={idx}
+                isHighlighted={isHighlighted(idx)}
+                style={getStyle(idx)}
+                title={getTitle?.(idx)}
+              >
+                {char}
+              </CharNode>
+            );
+          })}
         </p>
       ))}
     </div>
@@ -56,10 +63,11 @@ type CharNodeProps = {
   charIndex: number;
   isHighlighted: boolean;
   style: React.CSSProperties;
+  title?: string;
 };
 
-const CharNode: React.FC<CharNodeProps> = ({ charIndex, isHighlighted, style, children }) => (
-  <span data-position={charIndex} style={isHighlighted ? style : {}}>
+const CharNode: React.FC<CharNodeProps> = ({ charIndex, isHighlighted, style, title, children }) => (
+  <span data-position={charIndex} style={isHighlighted ? style : {}} title={title}>
     {children}
   </span>
 );

@@ -54,6 +54,26 @@ const useContentView = (selections: Range[], correction?: Correction) => {
     };
   };
 
+  const asTitle = (index: number) => {
+    if (!correction || !isInCorrection(index)) {
+      return false;
+    }
+
+    return true;
+  };
+
+  const getTitle = (index: number) => {
+    if (!asTitle(index)) {
+      return;
+    }
+
+    for (const { range, text } of correction!.corrections) {
+      if (numberIsInRangeArray(index, [range])) {
+        return text;
+      }
+    }
+  };
+
   return {
     isUnselectText,
     setIsUnselectText,
@@ -62,6 +82,7 @@ const useContentView = (selections: Range[], correction?: Correction) => {
     correctionRanges,
     getHighlightedStyled,
     handleOnSelectText,
+    getTitle,
   };
 };
 
