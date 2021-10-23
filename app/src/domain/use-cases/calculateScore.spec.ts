@@ -12,20 +12,17 @@ import { AppStore, createStore } from '../redux/store';
 import { Dependencies } from '../redux/types';
 import { createCorrection, createDeps, createMisinformation } from '../shared/factories';
 import fixture from '../shared/fixture-test.json';
-import InMemoryMisinformationGateway from '../shared/gateways/InMemoryMisinformationGateway';
 import { Range } from '../types';
 
 import { calculateScore } from './calculateScore';
 const fixtureCorrections = fixture.corrections as { range: Range; text: string }[];
 
 describe('calculateScore', () => {
-  let misinformationGateway: InMemoryMisinformationGateway;
   let store: AppStore;
   let deps: Dependencies;
 
   beforeEach(() => {
-    misinformationGateway = new InMemoryMisinformationGateway();
-    deps = createDeps({ misinformationGateway });
+    deps = createDeps();
     store = createStore(deps);
   });
 

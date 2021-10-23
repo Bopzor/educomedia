@@ -1,7 +1,7 @@
 import { expect } from 'earljs';
 
 import { AppStore, createStore } from '../redux/store';
-import { createInformation, createMisinformation } from '../shared/factories';
+import { createDeps, createInformation, createMisinformation } from '../shared/factories';
 import InMemoryInformationGateway from '../shared/gateways/InMemoryInformationGateway';
 import InMemoryMisinformationGateway from '../shared/gateways/InMemoryMisinformationGateway';
 
@@ -14,8 +14,7 @@ describe('accessInformationTitle', () => {
   let store: AppStore;
 
   beforeEach(() => {
-    misinformationGateway = new InMemoryMisinformationGateway();
-    informationGateway = new InMemoryInformationGateway();
+    ({ misinformationGateway, informationGateway } = createDeps());
     store = createStore({ misinformationGateway, informationGateway });
   });
 

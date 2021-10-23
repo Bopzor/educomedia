@@ -28,7 +28,12 @@ export const createCorrection = (correction?: Partial<Correction>): Correction =
   ...correction,
 });
 
-export const createDeps = (deps?: Partial<Dependencies>): Dependencies => ({
+interface InMemoryDependencies extends Dependencies {
+  misinformationGateway: InMemoryMisinformationGateway;
+  informationGateway: InMemoryInformationGateway;
+}
+
+export const createDeps = (deps?: Partial<InMemoryDependencies>): InMemoryDependencies => ({
   misinformationGateway: new InMemoryMisinformationGateway(),
   informationGateway: new InMemoryInformationGateway(),
   ...deps,

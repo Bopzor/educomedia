@@ -1,22 +1,19 @@
 import { expect } from 'earljs';
 
-import { createInformation } from '../../shared/factories';
-import InMemoryInformationGateway from '../../shared/gateways/InMemoryInformationGateway';
-import InMemoryMisinformationGateway from '../../shared/gateways/InMemoryMisinformationGateway';
+import { createDeps, createInformation } from '../../shared/factories';
 import { setInformationTitle } from '../actions/misinformationActions';
 import { AppStore, createStore } from '../store';
+import { Dependencies } from '../types';
 
 import selectInformationTitle from './selectInformationTitle';
 
 describe('selectInformationTitle', () => {
+  let deps: Dependencies;
   let store: AppStore;
-  let misinformationGateway: InMemoryMisinformationGateway;
-  let informationGateway: InMemoryInformationGateway;
 
   before(() => {
-    misinformationGateway = new InMemoryMisinformationGateway();
-    informationGateway = new InMemoryInformationGateway();
-    store = createStore({ misinformationGateway, informationGateway });
+    deps = createDeps();
+    store = createStore(deps);
   });
 
   it('selects the score', () => {

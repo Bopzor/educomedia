@@ -2,21 +2,20 @@ import { expect } from 'earljs';
 
 import { setMisinformation, setSelections } from '../redux/actions/misinformationActions';
 import { AppStore, createStore } from '../redux/store';
-import { Dependencies } from '../redux/types';
 import { createCorrection, createDeps, createMisinformation } from '../shared/factories';
+import InMemoryInformationGateway from '../shared/gateways/InMemoryInformationGateway';
 import InMemoryMisinformationGateway from '../shared/gateways/InMemoryMisinformationGateway';
 
 import { validateSelections } from './validateSelections';
 
 describe('validateSelections', () => {
   let misinformationGateway: InMemoryMisinformationGateway;
+  let informationGateway: InMemoryInformationGateway;
   let store: AppStore;
-  let deps: Dependencies;
 
   beforeEach(() => {
-    misinformationGateway = new InMemoryMisinformationGateway();
-    deps = createDeps({ misinformationGateway });
-    store = createStore(deps);
+    ({ misinformationGateway, informationGateway } = createDeps());
+    store = createStore({ misinformationGateway, informationGateway });
   });
 
   it('validates the selections', async () => {

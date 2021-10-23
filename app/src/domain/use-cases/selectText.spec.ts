@@ -3,18 +3,15 @@ import { expect } from 'earljs';
 import { AppStore, createStore } from '../redux/store';
 import { Dependencies } from '../redux/types';
 import { createDeps } from '../shared/factories';
-import InMemoryMisinformationGateway from '../shared/gateways/InMemoryMisinformationGateway';
 
 import { selectText } from './selectText';
 
 describe('selectText', () => {
-  let misinformationGateway: InMemoryMisinformationGateway;
   let store: AppStore;
   let deps: Dependencies;
 
   beforeEach(() => {
-    misinformationGateway = new InMemoryMisinformationGateway();
-    deps = createDeps({ misinformationGateway });
+    deps = createDeps();
     store = createStore(deps);
   });
 
