@@ -3,7 +3,7 @@ import type { Dispatch, GetState } from '../redux/types';
 import { isOverlappingRange } from '../shared/utils';
 import { Range } from '../types';
 
-const selectText =
+export const selectText =
   (start: number, end: number) =>
   (dispatch: Dispatch, getState: GetState): void => {
     const { selections } = getState();
@@ -45,5 +45,3 @@ const getSelectionStartEnd = (item: Range, items: Range[]) => {
 
   return returnedValue;
 };
-
-export default selectText;

@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux';
 import { Correction } from 'src/domain/entities/correction';
 import { numberIsInRangeArray } from 'src/domain/shared/utils';
 import { Range } from 'src/domain/types';
-import selectText from 'src/domain/use-cases/selectText';
-import unselectText from 'src/domain/use-cases/unselectText';
+import { selectText } from 'src/domain/use-cases/selectText';
+import { unselectText } from 'src/domain/use-cases/unselectText';
 
 const useContentView = (selections: Range[], correction?: Correction) => {
   const [isUnselectText, setIsUnselectText] = useState(false);

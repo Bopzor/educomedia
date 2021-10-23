@@ -15,7 +15,7 @@ import fixture from '../shared/fixture-test.json';
 import InMemoryMisinformationGateway from '../shared/gateways/InMemoryMisinformationGateway';
 import { Range } from '../types';
 
-import calculateScore from './calculateScore';
+import { calculateScore } from './calculateScore';
 const fixtureCorrections = fixture.corrections as { range: Range; text: string }[];
 
 describe('calculateScore', () => {
@@ -29,10 +29,10 @@ describe('calculateScore', () => {
     store = createStore(deps);
   });
 
-  it('calculates the score', async () => {
+  it('calculates the score', () => {
     const misinformation = createMisinformation();
     const correction = createCorrection();
-    await setupStore(misinformation, correction, [[13, 13]]);
+    setupStore(misinformation, correction, [[13, 13]]);
 
     store.dispatch(calculateScore());
 
@@ -40,10 +40,10 @@ describe('calculateScore', () => {
     expect(state.score).toEqual(100);
   });
 
-  it('calculates a complex score', async () => {
+  it('calculates a complex score', () => {
     const misinformation = createMisinformation({ content: fixture.misinformation });
     const correction = createCorrection({ corrections: fixtureCorrections });
-    await setupStore(misinformation, correction, [
+    setupStore(misinformation, correction, [
       [37, 86],
       [797, 839],
       [2698, 2757],
@@ -55,10 +55,10 @@ describe('calculateScore', () => {
     expect(state.score).toEqual(93);
   });
 
-  it("returns a score equal to 0 if it's negative", async () => {
+  it("returns a score equal to 0 if it's negative", () => {
     const misinformation = createMisinformation({ content: fixture.misinformation });
     const correction = createCorrection({ corrections: fixtureCorrections });
-    await setupStore(misinformation, correction, [[4, 10]]);
+    setupStore(misinformation, correction, [[4, 10]]);
 
     store.dispatch(calculateScore());
 

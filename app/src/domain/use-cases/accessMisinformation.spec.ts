@@ -5,7 +5,7 @@ import { createInformation, createMisinformation } from '../shared/factories';
 import InMemoryInformationGateway from '../shared/gateways/InMemoryInformationGateway';
 import InMemoryMisinformationGateway from '../shared/gateways/InMemoryMisinformationGateway';
 
-import accessInformation from './accessMisinformation';
+import { accessMisinformation } from './accessMisinformation';
 
 describe('accessMisinformation', () => {
   let misinformationGateway: InMemoryMisinformationGateway;
@@ -18,13 +18,13 @@ describe('accessMisinformation', () => {
     store = createStore({ misinformationGateway, informationGateway });
   });
 
-  it('accesses the information from the id', async () => {
+  it('accesses the misinformation from the id', async () => {
     const misinformation = createMisinformation();
     const information = createInformation();
     misinformationGateway.misinformations.set(misinformation.id, misinformation);
     informationGateway.informations.set(information.id, information);
 
-    await store.dispatch(accessInformation(misinformation.id));
+    await store.dispatch(accessMisinformation(misinformation.id));
 
     const state = store.getState();
 

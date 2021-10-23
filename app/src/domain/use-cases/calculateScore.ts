@@ -3,7 +3,7 @@ import type { Dispatch, GetState } from '../redux/types';
 import { extraInCompareTo, missingInCompareTo } from '../shared/utils';
 import { Range } from '../types';
 
-const calculateScore =
+export const calculateScore =
   () =>
   (dispatch: Dispatch, getState: GetState): void => {
     const { selections, correction } = getState();
@@ -29,5 +29,3 @@ const flatRangesToExhaustiveNumbers = (list: number[], [start, end]: Range): num
 
   return list;
 };
-
-export default calculateScore;

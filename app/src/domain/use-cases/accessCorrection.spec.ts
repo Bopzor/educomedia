@@ -6,7 +6,7 @@ import { Dependencies } from '../redux/types';
 import { createCorrection, createDeps, createMisinformation } from '../shared/factories';
 import InMemoryMisinformationGateway from '../shared/gateways/InMemoryMisinformationGateway';
 
-import accessCorrection from './accessCorrection';
+import { accessCorrection } from './accessCorrection';
 
 describe('accessCorrection', () => {
   let misinformationGateway: InMemoryMisinformationGateway;

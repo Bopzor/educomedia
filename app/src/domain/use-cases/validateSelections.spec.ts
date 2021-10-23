@@ -6,7 +6,7 @@ import { Dependencies } from '../redux/types';
 import { createCorrection, createDeps, createMisinformation } from '../shared/factories';
 import InMemoryMisinformationGateway from '../shared/gateways/InMemoryMisinformationGateway';
 
-import validateSelections from './validateSelections';
+import { validateSelections } from './validateSelections';
 
 describe('validateSelections', () => {
   let misinformationGateway: InMemoryMisinformationGateway;

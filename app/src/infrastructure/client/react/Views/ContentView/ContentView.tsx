@@ -7,7 +7,7 @@ import selectCorrection from 'src/domain/redux/selectors/selectCorrection';
 import selectInformationTitle from 'src/domain/redux/selectors/selectInformationTitle';
 import selectMisinformation from 'src/domain/redux/selectors/selectMisinformation';
 import selectSelections from 'src/domain/redux/selectors/selectSelections';
-import validateSelections from 'src/domain/use-cases/validateSelections';
+import { validateSelections } from 'src/domain/use-cases/validateSelections';
 
 import Highlightable from '../../components/Highlightable/Highlightable';
 import Score from '../../components/Score';

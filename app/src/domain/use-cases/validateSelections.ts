@@ -1,10 +1,10 @@
 import { setSelectionsValidated } from '../redux/actions/misinformationActions';
 import type { Dispatch } from '../redux/types';
 
-import accessCorrection from './accessCorrection';
-import calculateScore from './calculateScore';
+import { accessCorrection } from './accessCorrection';
+import { calculateScore } from './calculateScore';
 
-const validateSelections =
+export const validateSelections =
   () =>
   async (dispatch: Dispatch): Promise<void> => {
     dispatch(setSelectionsValidated(true));
@@ -13,5 +13,3 @@ const validateSelections =
 
     dispatch(calculateScore());
   };
-
-export default validateSelections;

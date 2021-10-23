@@ -2,10 +2,10 @@ import { expect } from 'earljs';
 
 import { AppStore, createStore } from '../redux/store';
 import { Range } from '../types';
-import accessMisinformation from '../use-cases/accessMisinformation';
-import selectText from '../use-cases/selectText';
-import unselectText from '../use-cases/unselectText';
-import validateSelections from '../use-cases/validateSelections';
+import { accessMisinformation } from '../use-cases/accessMisinformation';
+import { selectText } from '../use-cases/selectText';
+import { unselectText } from '../use-cases/unselectText';
+import { validateSelections } from '../use-cases/validateSelections';
 
 import { createCorrection, createInformation, createMisinformation } from './factories';
 import fixture from './fixture-test.json';

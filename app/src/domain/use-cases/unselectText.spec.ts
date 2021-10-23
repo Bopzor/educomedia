@@ -6,7 +6,7 @@ import { Dependencies } from '../redux/types';
 import { createDeps } from '../shared/factories';
 import InMemoryMisinformationGateway from '../shared/gateways/InMemoryMisinformationGateway';
 
-import unselectText from './unselectText';
+import { unselectText } from './unselectText';
 
 describe('selectText', () => {
   let misinformationGateway: InMemoryMisinformationGateway;
