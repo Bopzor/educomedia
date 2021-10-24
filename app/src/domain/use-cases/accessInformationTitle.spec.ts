@@ -1,12 +1,12 @@
 import { expect } from 'earljs';
 
+import { setMisinformation } from '../redux/actions/misinformationActions';
 import { AppStore, createStore } from '../redux/store';
 import { createDeps, createInformation, createMisinformation } from '../shared/factories';
 import InMemoryInformationGateway from '../shared/gateways/InMemoryInformationGateway';
 import InMemoryMisinformationGateway from '../shared/gateways/InMemoryMisinformationGateway';
 
 import { accessInformationTitle } from './accessInformationTitle';
-import { accessMisinformation } from './accessMisinformation';
 
 describe('accessInformationTitle', () => {
   let misinformationGateway: InMemoryMisinformationGateway;
@@ -23,8 +23,7 @@ describe('accessInformationTitle', () => {
     const information = createInformation();
     misinformationGateway.misinformations.set(misinformation.id, misinformation);
     informationGateway.informations.set(misinformation.informationId, information);
-    // TODO: Should I be able to setup the store without having to dispatch this action?
-    await store.dispatch(accessMisinformation(misinformation.id));
+    store.dispatch(setMisinformation(misinformation));
 
     await store.dispatch(accessInformationTitle());
 

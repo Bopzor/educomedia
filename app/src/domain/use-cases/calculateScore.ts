@@ -1,4 +1,6 @@
 import { setScore } from '../redux/actions/misinformationActions';
+import selectCorrection from '../redux/selectors/selectCorrection';
+import selectSelections from '../redux/selectors/selectSelections';
 import type { Dispatch, GetState } from '../redux/types';
 import { extraInCompareTo, missingInCompareTo } from '../shared/utils';
 import { Range } from '../types';
@@ -6,7 +8,9 @@ import { Range } from '../types';
 export const calculateScore =
   () =>
   (dispatch: Dispatch, getState: GetState): void => {
-    const { selections, correction } = getState();
+    const state = getState();
+    const selections = selectSelections(state);
+    const correction = selectCorrection(state);
 
     const correctionCharList: number[] = correction!.corrections
       .map((c) => c.range)

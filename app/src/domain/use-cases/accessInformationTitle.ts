@@ -1,11 +1,11 @@
 import { setInformationTitle } from '../redux/actions/misinformationActions';
+import selectMisinformation from '../redux/selectors/selectMisinformation';
 import type { ThunkResult } from '../redux/types';
 
-// TODO: Should this take this information.id in parameters instead of getting it from the misinformation in the store?
 export const accessInformationTitle =
   (): ThunkResult<Promise<void>> =>
   async (dispatch, getState, { informationGateway }): Promise<void> => {
-    const misinformation = getState().misinformation;
+    const misinformation = selectMisinformation(getState());
 
     if (!misinformation) {
       return;

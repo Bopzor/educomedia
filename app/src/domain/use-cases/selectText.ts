@@ -1,4 +1,5 @@
 import { setSelections } from '../redux/actions/misinformationActions';
+import selectSelections from '../redux/selectors/selectSelections';
 import type { Dispatch, GetState } from '../redux/types';
 import { isOverlappingRange } from '../shared/utils';
 import { Range } from '../types';
@@ -6,7 +7,7 @@ import { Range } from '../types';
 export const selectText =
   (start: number, end: number) =>
   (dispatch: Dispatch, getState: GetState): void => {
-    const { selections } = getState();
+    const selections = selectSelections(getState());
 
     const overlapping: Range[] = findOverlapping([start, end], selections);
 
