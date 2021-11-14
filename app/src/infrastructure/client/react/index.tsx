@@ -12,6 +12,8 @@ import { Range } from 'src/domain/types';
 
 import App from './App';
 
+import 'tailwindcss/tailwind.css';
+
 const misinformationGateway = new InMemoryMisinformationGateway();
 const informationGateway = new InMemoryInformationGateway();
 
