@@ -23,8 +23,10 @@ const ContentView: React.FC = () => {
   const correction = useSelector(selectCorrection);
   const dispatch = useDispatch();
 
-  const { isUnselectText, setIsUnselectText, correctionRanges, getHighlightedStyled, handleOnSelectText, getTitle } =
-    useContentView(selections, correction);
+  const { isUnselectText, setIsUnselectText, correctionRanges, highlightedStyled, handleOnSelectText } = useContentView(
+    selections,
+    correction,
+  );
 
   if (!misinformation) {
     return null;
@@ -46,9 +48,8 @@ const ContentView: React.FC = () => {
           text={misinformation.content}
           selections={[...selections, ...correctionRanges]}
           onSelectText={handleOnSelectText}
-          highlightedStyle={correction ? (charIndex) => getHighlightedStyled(charIndex) : undefined}
+          highlightedStyle={highlightedStyled}
           disabled={Boolean(correction)}
-          getTitle={getTitle}
         />
       </div>
 

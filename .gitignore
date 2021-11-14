@@ -2,5 +2,6 @@
 
 **/node_modules/
 app/dist
+app/src/domain/shared/test.spec.ts
 
 notes/

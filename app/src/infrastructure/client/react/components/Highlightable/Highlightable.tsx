@@ -1,5 +1,10 @@
 import React from 'react';
 
+import { useSelector } from 'react-redux';
+
+import { selectCorrectionText } from 'src/domain/redux/selectors/selectCorrectionText';
+import { HighlightedState, selectHighlightedState } from 'src/domain/redux/selectors/selectHighlightedState';
+import { AppState } from 'src/domain/redux/types';
 import { Range } from 'src/domain/types';
 
 import useHighlightable from './hooks/useHighlightable';
@@ -9,8 +14,7 @@ type HighlightableProps = {
   selections: Range[];
   disabled: boolean;
   onSelectText: (range: Range) => void;
-  getTitle?: (index: number) => string | undefined;
-  highlightedStyle?: React.CSSProperties | ((charIndex: number) => React.CSSProperties);
+  highlightedStyle: { [key in HighlightedState]: React.CSSProperties };
 };
 
 const Highlightable: React.FC<HighlightableProps> = ({
@@ -18,14 +22,12 @@ const Highlightable: React.FC<HighlightableProps> = ({
   selections,
   disabled,
   onSelectText,
-  getTitle,
-  highlightedStyle = { backgroundColor: 'yellow' },
+  highlightedStyle,
 }) => {
-  const { paragraphs, getOffsetIndex, getStyle, setIsSelecting, isHighlighted, handleOnMouseUp } = useHighlightable(
+  const { paragraphs, getOffsetIndex, setIsSelecting, handleOnMouseUp } = useHighlightable(
     disabled,
     text,
     selections,
-    highlightedStyle,
     onSelectText,
   );
 
@@ -42,13 +44,7 @@ const Highlightable: React.FC<HighlightableProps> = ({
             const idx = index + getOffsetIndex(paragraphIndex);
 
             return (
-              <CharNode
-                key={`${char}-${idx}`}
-                charIndex={idx}
-                isHighlighted={isHighlighted(idx)}
-                style={getStyle(idx)}
-                title={getTitle?.(idx)}
-              >
+              <CharNode key={`${char}-${idx}`} charIndex={idx} highlightedStyle={highlightedStyle}>
                 {char}
               </CharNode>
             );
@@ -61,15 +57,18 @@ const Highlightable: React.FC<HighlightableProps> = ({
 
 type CharNodeProps = {
   charIndex: number;
-  isHighlighted: boolean;
-  style: React.CSSProperties;
-  title?: string;
+  highlightedStyle: { [key in HighlightedState]: React.CSSProperties };
 };
 
-const CharNode: React.FC<CharNodeProps> = ({ charIndex, isHighlighted, style, title, children }) => (
-  <span data-position={charIndex} style={isHighlighted ? style : {}} title={title}>
-    {children}
-  </span>
-);
+const CharNode: React.FC<CharNodeProps> = ({ charIndex, highlightedStyle, children }) => {
+  const title = useSelector((state: AppState) => selectCorrectionText(state, charIndex));
+  const highlightedState = useSelector((state: AppState) => selectHighlightedState(state, charIndex));
+
+  return (
+    <span data-position={charIndex} style={highlightedState ? highlightedStyle[highlightedState] : {}} title={title}>
+      {children}
+    </span>
+  );
+};
 
 export default Highlightable;

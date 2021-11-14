@@ -7,7 +7,7 @@ import { createDeps } from '../shared/factories';
 
 import { unselectText } from './unselectText';
 
-describe('selectText', () => {
+describe('unselectText', () => {
   let store: AppStore;
   let deps: Dependencies;
 

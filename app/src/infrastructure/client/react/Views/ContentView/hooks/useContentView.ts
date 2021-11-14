@@ -3,7 +3,6 @@ import { useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { Correction } from 'src/domain/entities/correction';
-import { numberIsInRangeArray } from 'src/domain/shared/utils';
 import { Range } from 'src/domain/types';
 import { selectText } from 'src/domain/use-cases/selectText';
 import { unselectText } from 'src/domain/use-cases/unselectText';
@@ -27,51 +26,20 @@ const useContentView = (selections: Range[], correction?: Correction) => {
     dispatch(action(start, end));
   };
 
-  const isInCorrection = (charIndex: number) => {
-    return numberIsInRangeArray(charIndex, correctionRanges);
-  };
-
-  const isInSelections = (charIndex: number) => {
-    return numberIsInRangeArray(charIndex, selections);
-  };
-
-  const getHighlightedStyled = (charIndex: number) => {
-    if (isInCorrection(charIndex) && isInSelections(charIndex)) {
-      return {
-        fontWeight: 700,
-        color: 'green',
-      };
-    }
-
-    if (isInCorrection(charIndex)) {
-      return {
-        fontWeight: 700,
-      };
-    }
-
-    return {
+  const highlightedStyled = {
+    success: {
+      fontWeight: 700,
+      color: 'green',
+    },
+    correction: {
+      fontWeight: 700,
+    },
+    error: {
       color: 'red',
-    };
-  };
-
-  const asTitle = (index: number) => {
-    if (!correction || !isInCorrection(index)) {
-      return false;
-    }
-
-    return true;
-  };
-
-  const getTitle = (index: number) => {
-    if (!asTitle(index)) {
-      return;
-    }
-
-    for (const { range, text } of correction!.corrections) {
-      if (numberIsInRangeArray(index, [range])) {
-        return text;
-      }
-    }
+    },
+    default: {
+      backgroundColor: 'yellow',
+    },
   };
 
   return {
@@ -80,9 +48,8 @@ const useContentView = (selections: Range[], correction?: Correction) => {
     selections,
     correction,
     correctionRanges,
-    getHighlightedStyled,
+    highlightedStyled,
     handleOnSelectText,
-    getTitle,
   };
 };
 

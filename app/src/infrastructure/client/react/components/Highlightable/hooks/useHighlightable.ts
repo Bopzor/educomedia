@@ -1,4 +1,4 @@
-import { CSSProperties, useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { numberIsInRangeArray } from 'src/domain/shared/utils';
 import { Range } from 'src/domain/types';
@@ -9,18 +9,9 @@ const useHighlightable = (
   disabled: boolean,
   text: string,
   selections: Range[],
-  highlightedStyle: React.CSSProperties | ((charIndex: number) => CSSProperties),
   onSelectText: (range: Range) => void,
 ) => {
   const [isSelecting, setIsSelecting] = useState(false);
-
-  const getStyle = (charIndex: number): React.CSSProperties => {
-    if (typeof highlightedStyle === 'function') {
-      return highlightedStyle(charIndex);
-    }
-
-    return highlightedStyle;
-  };
 
   const paragraphs = useMemo(() => text.split('\n\n'), [text]);
   const getOffsetIndex = useCallback(
@@ -66,7 +57,7 @@ const useHighlightable = (
     return numberIsInRangeArray(index, selections);
   };
 
-  return { paragraphs, getOffsetIndex, getStyle, setIsSelecting, isHighlighted, handleOnMouseUp };
+  return { paragraphs, getOffsetIndex, setIsSelecting, isHighlighted, handleOnMouseUp };
 };
 
 export default useHighlightable;
