@@ -26,29 +26,13 @@ const useContentView = (selections: Range[], correction?: Correction) => {
     dispatch(action(start, end));
   };
 
-  const highlightedStyled = {
-    success: {
-      fontWeight: 700,
-      color: 'green',
-    },
-    correction: {
-      fontWeight: 700,
-    },
-    error: {
-      color: 'red',
-    },
-    default: {
-      backgroundColor: 'yellow',
-    },
-  };
-
   return {
     isUnselectText,
     setIsUnselectText,
     selections,
     correction,
     correctionRanges,
-    highlightedStyled,
+
     handleOnSelectText,
   };
 };

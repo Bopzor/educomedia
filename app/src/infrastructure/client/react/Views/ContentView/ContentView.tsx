@@ -9,9 +9,8 @@ import selectMisinformation from 'src/domain/redux/selectors/selectMisinformatio
 import selectSelections from 'src/domain/redux/selectors/selectSelections';
 import { validateSelections } from 'src/domain/use-cases/validateSelections';
 
-import Highlightable from '../../components/Highlightable/Highlightable';
-import Score from '../../components/Score';
-import Toolbar from '../../components/Toolbar';
+import Aside from '../../components/Aside/Aside';
+import Misinformation from '../../components/Misinformation/Misinformation';
 
 import useContentView from './hooks/useContentView';
 
@@ -23,7 +22,7 @@ const ContentView: React.FC = () => {
   const correction = useSelector(selectCorrection);
   const dispatch = useDispatch();
 
-  const { isUnselectText, setIsUnselectText, correctionRanges, highlightedStyled, handleOnSelectText } = useContentView(
+  const { isUnselectText, setIsUnselectText, correctionRanges, handleOnSelectText } = useContentView(
     selections,
     correction,
   );
@@ -33,33 +32,25 @@ const ContentView: React.FC = () => {
   }
 
   return (
-    <div style={{ margin: 'auto', maxWidth: 800, fontFamily: 'sans-serif' }}>
-      <h1 style={{ textAlign: 'center', marginBottom: 24 }}>{informationTitle}</h1>
-
-      <Toolbar
+    <div className="font-sans grid grid-cols-4 gap-10 pr-10 h-full">
+      <Aside
+        isToolbarDisabled={Boolean(correction)}
         isUnselectText={isUnselectText}
         onClearSelections={() => dispatch(clearSelections())}
         onToggleSelection={() => setIsUnselectText((b) => !b)}
-        disabled={Boolean(correction)}
+        isValidateSelectionsDisabled={selections.length <= 0 || Boolean(correction)}
+        onValidateSelections={() => dispatch(validateSelections())}
+        showScore={Boolean(correction)}
       />
 
-      <div style={{ textAlign: 'justify', marginBottom: 64, marginTop: 32 }}>
-        <Highlightable
-          text={misinformation.content}
-          selections={[...selections, ...correctionRanges]}
-          onSelectText={handleOnSelectText}
-          highlightedStyle={highlightedStyled}
-          disabled={Boolean(correction)}
-        />
-      </div>
-
-      {correction && <Score />}
-
-      <div style={{ textAlign: 'center' }}>
-        <button disabled={selections.length <= 0 || Boolean(correction)} onClick={() => dispatch(validateSelections())}>
-          Envoyer la réponse
-        </button>
-      </div>
+      <Misinformation
+        title={informationTitle ?? ''}
+        text={misinformation.content}
+        selections={[...selections, ...correctionRanges]}
+        onSelectText={handleOnSelectText}
+        canSelect={Boolean(!correction)}
+        isUnselectText={isUnselectText}
+      />
     </div>
   );
 };
